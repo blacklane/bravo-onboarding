@@ -19,13 +19,15 @@ EXPOSE 4567
 # Tell Docker that when we run "docker run", we want it to
 # run the following command:
 # $ bundle exec rackup --host 0.0.0.0 -p 4567.
-# CMD ["bundle", "exec", "rackup", "--host", "0.0.0.0", "-p", "4567"]
-CMD ["bundle", "exec", "ruby", "myapp.rb"]
+CMD ["bundle", "exec", "rackup", "--host", "0.0.0.0", "-p", "4567"]
+# CMD ["bundle", "exec", "ruby", "myapp.rb"]
+
+# build image again when changing the Dockerfile
 
 # Dockercommands terminal
 
 # build image
-# docker build --tag hello .
+# docker build --tag myapp .
 
 # run image
-# docker run -p 80:4567 hello
+# docker run -p 80:4567 myapp
