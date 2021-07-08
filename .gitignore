@@ -1,1 +1,3 @@
 .idea/
+.rubocop-http*.env
+.env*

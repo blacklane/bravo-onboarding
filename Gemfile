@@ -1,5 +1,15 @@
-source 'https://rubygems.org'
+# frozen_string_literal: true
 
-gem 'sinatra'
+source "https://rubygems.org"
 
-gem 'sinatra-contrib'
+gem "sinatra"
+
+gem "sinatra-contrib"
+
+gem "dotenv-rails"
+
+gem "rack-test"
+
+%w[rspec rspec-core rspec-expectations rspec-mocks rspec-support].each do |lib|
+  gem lib, :git => "https://github.com/rspec/#{lib}.git", :branch => 'main'
+end
