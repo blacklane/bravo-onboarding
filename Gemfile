@@ -8,6 +8,8 @@ gem "sinatra-contrib"
 
 gem "dotenv-rails"
 
+gem "dotenv"
+
 gem "rack-test"
 
 %w[rspec rspec-core rspec-expectations rspec-mocks rspec-support].each do |lib|
