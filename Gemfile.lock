@@ -127,6 +127,7 @@ DEPENDENCIES
   dotenv
   dotenv-rails
   rack-test
+  rake
   rspec!
   rspec-core!
   rspec-expectations!
