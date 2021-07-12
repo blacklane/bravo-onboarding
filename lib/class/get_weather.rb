@@ -11,7 +11,7 @@ class GetWeather
   end
 
   def get_weather
-    api = "http://api.openweathermap.org/data/2.5/weather?q=#{@city}&units=metric&appid=a64896bb4676c4331e621f1940dc623d"
+    api = "http://api.openweathermap.org/data/2.5/weather?q=#{@city}&units=metric&appid=#{ENV[\"OPENWEATHER_API_KEY\"]}"
 
     weather_serialized = URI.open(api).read
 
