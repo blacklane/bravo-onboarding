@@ -1,6 +1,6 @@
 ENV["APP_ENV"] = "test"
 
-require "./lib/myapp" # <-- my sinatra app
+require "./lib/app" # <-- my sinatra app
 require "rspec"
 require "rack/test"
 

@@ -4,8 +4,10 @@ require "sinatra"
 require "json"
 require "open-uri"
 require "sinatra/reloader"
-require_relative "./class/get_weather"
 require "dotenv"
+require 'dotenv/load'
+
+require_relative "./class/get_weather"
 
 get "/" do
   erb :index
