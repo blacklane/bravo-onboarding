@@ -11,11 +11,11 @@ RSpec.describe "My App" do
     Sinatra::Application
   end
 
-  # Use let to reuse Berlin class instance
-  let(:berlin_instance) { GetWeather.new("Berlin") }
+  # Use let to reuse Berlin blacklane_weather instance
+  let(:berlin_instance) { WeatherForecast.new("Berlin") }
 
   it "creates a new instance of GetWeather" do
-    expect(berlin_instance).to be_an_instance_of(GetWeather)
+    expect(berlin_instance).to be_an_instance_of(WeatherForecast)
   end
 
   it "displays a homepage" do
@@ -36,6 +36,6 @@ RSpec.describe "My App" do
   end
 
   it "raises an error with invalid city" do
-    expect { GetWeather.new("abcd").get_weather }.to raise_error(OpenURI::HTTPError)
+    expect { WeatherForecast.new("abcd").get_weather }.to raise_error(OpenURI::HTTPError)
   end
 end

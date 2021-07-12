@@ -4,7 +4,7 @@ require "json"
 require "open-uri"
 require "dotenv"
 
-class GetWeather
+class WeatherForecast
   attr_reader :city
 
   def initialize(city)
@@ -23,6 +23,6 @@ class GetWeather
 
     #  better to return an object
     # define our own structure and provide only what is relevant to expose
-    # make a new class instance with specific data
+    # make a new blacklane_weather instance with specific data
   end
 end
