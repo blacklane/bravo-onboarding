@@ -14,28 +14,24 @@ RSpec.describe "My App" do
   # Use let to reuse Berlin blacklane_weather instance
   let(:berlin_instance) { WeatherForecast.new("Berlin") }
 
-  it "creates a new instance of GetWeather" do
-    expect(berlin_instance).to be_an_instance_of(WeatherForecast)
-  end
-
   it "displays a homepage" do
     get "/"
     expect(last_response).to be_ok
   end
 
   it "returns an object when a proper city is given" do
-    berlin_weather_data = berlin_instance.get_weather
+    berlin_weather_data = berlin_instance.weather_call
     #  expect this to return an object, not specifically a json.
     expect(berlin_weather_data).not_to be_nil
   end
 
   it "returns a longitude of 13.4105 & a latitude of 52.5244 when given Berlin as an argument" do
-    berlin_weather_data = berlin_instance.get_weather
+    berlin_weather_data = berlin_instance.weather_call
     expect(berlin_weather_data["coord"]["lon"]).to eq(13.4105)
     expect(berlin_weather_data["coord"]["lat"]).to eq(52.5244)
   end
 
   it "raises an error with invalid city" do
-    expect { WeatherForecast.new("abcd").get_weather }.to raise_error(OpenURI::HTTPError)
+    expect { WeatherForecast.new("abcd").weather_call }.to raise_error(OpenURI::HTTPError)
   end
 end

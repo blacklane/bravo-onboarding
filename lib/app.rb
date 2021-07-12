@@ -14,7 +14,7 @@ get "/" do
 end
 
 post "/weather" do
-  @weather = WeatherForecast.new(params["city"]).get_weather
+  @weather = WeatherForecast.new(params["city"]).weather_call
   erb(:weather)
   #  rescue any error if not specified
 rescue OpenURI::HTTPError

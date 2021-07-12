@@ -2,7 +2,6 @@
 
 require "json"
 require "open-uri"
-require "dotenv"
 
 class WeatherForecast
   attr_reader :city
@@ -11,10 +10,8 @@ class WeatherForecast
     @city = city
   end
 
-  # catch exception and re-raise it
-
-  def get_weather
-    api = "http://api.openweathermap.org/data/2.5/weather?q=#{@city}&units=metric&appid=#{ENV["OPENWEATHER_API_KEY"]}"
+  def weather_call
+    api = "http://api.openweathermap.org/data/2.5/weather?q=#{@city}&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
     # api = "http://api.openweathermap.org/data/2.5/weather?q=#{@city}&units=metric&appid=a64896bb4676c4331e621f1940dc623d"
 
     weather_serialized = URI.open(api).read
@@ -25,4 +22,5 @@ class WeatherForecast
     # define our own structure and provide only what is relevant to expose
     # make a new blacklane_weather instance with specific data
   end
+  # catch exception and re-raise it
 end
