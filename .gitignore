@@ -1,3 +1,5 @@
 .idea/
 .rubocop-http*.env
 .env*
+
+local_env.yml

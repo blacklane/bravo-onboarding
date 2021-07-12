@@ -2,6 +2,7 @@
 
 require "json"
 require "open-uri"
+require 'dotenv'
 
 class GetWeather
   attr_reader :city
@@ -11,7 +12,8 @@ class GetWeather
   end
 
   def get_weather
-    api = "http://api.openweathermap.org/data/2.5/weather?q=#{@city}&units=metric&appid=#{ENV[\"OPENWEATHER_API_KEY\"]}"
+    # api = "http://api.openweathermap.org/data/2.5/weather?q=#{@city}&units=metric&appid=#{ENV["OPENWEATHER_API_KEY"]}"
+    api = "http://api.openweathermap.org/data/2.5/weather?q=#{@city}&units=metric&appid=a64896bb4676c4331e621f1940dc623d"
 
     weather_serialized = URI.open(api).read
 

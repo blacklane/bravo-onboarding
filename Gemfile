@@ -6,7 +6,7 @@ gem "sinatra"
 
 gem "sinatra-contrib"
 
-gem "dotenv-rails"
+gem "dotenv-rails",
 
 gem "dotenv"
 

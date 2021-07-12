@@ -5,6 +5,7 @@ require "json"
 require "open-uri"
 require "sinatra/reloader"
 require_relative "./class/get_weather"
+require "dotenv"
 
 get "/" do
   erb :index
