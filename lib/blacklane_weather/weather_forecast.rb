@@ -3,6 +3,7 @@
 require "json"
 require "open-uri"
 require "./lib/errors/invalid_city_error"
+require_relative 'temperature_data'
 
 class WeatherForecast
   attr_reader :city
@@ -17,13 +18,19 @@ class WeatherForecast
 
     weather_serialized = URI.open(api).read
 
-    JSON.parse(weather_serialized)
-
+    weather_data = JSON.parse(weather_serialized)
+    temperature_data(weather_data)
     #  better to return an object
     # define our own structure and provide only what is relevant to expose
     # make a new blacklane_weather instance with specific data
   rescue OpenURI::HTTPError => e
     raise Errors::InvalidCityError.new(e, @city)
   end
-  # catch exception and re-raise it
+
+  private
+
+  def temperature_data(weather_data)
+    t = TemperatureData.new(weather_data["main"]["temp"], weather_data["main"]["feels_like"], weather_data["main"]["temp_min"], weather_data["main"]["temp_max"])
+    t.todays_forecast
+  end
 end

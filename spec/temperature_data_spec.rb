@@ -1,10 +1,10 @@
 ENV["APP_ENV"] = "test"
 
-require "./lib/blacklane_weather/weather_forecast"
+require "./lib/blacklane_weather/temperature_data"
 require "rspec"
 require "rack/test"
 
-RSpec.describe "The Weather Forecast class" do
+RSpec.describe "The Temperature Data class" do
   include Rack::Test::Methods
 
   def app
@@ -12,9 +12,9 @@ RSpec.describe "The Weather Forecast class" do
   end
 
   # Use let to reuse Berlin blacklane_weather instance
-  let(:berlin_instance) { WeatherForecast.new("Berlin") }
+  let(:temperature_instance) { TemperatureData.new(20, 21, 18, 23) }
 
   it "creates a new instance of GetWeather" do
-    expect(berlin_instance).to be_an_instance_of(WeatherForecast)
+    expect(temperature_instance).to be_an_instance_of(TemperatureData)
   end
 end

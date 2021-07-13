@@ -24,13 +24,12 @@ RSpec.describe "My App" do
     #  expect this to return an object, not specifically a json.
     expect(berlin_weather_data).not_to be_nil
   end
-
-  it "returns a longitude of 13.4105 & a latitude of 52.5244 when given Berlin as an argument" do
-    berlin_weather_data = berlin_instance.weather_call
-    expect(berlin_weather_data["coord"]["lon"]).to eq(13.4105)
-    expect(berlin_weather_data["coord"]["lat"]).to eq(52.5244)
+  context "when given Berlin as an argument" do
+    it "returns a hash" do
+      berlin_weather_data = berlin_instance.weather_call
+      expect(berlin_weather_data).to be_a(Hash)
+    end
   end
-
   it "raises an error with invalid city" do
     expect { WeatherForecast.new("abcd").weather_call }.to raise_error(Errors::InvalidCityError)
   end

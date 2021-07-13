@@ -1,2 +1,3 @@
- <p>  The current temperature in <%= params["city"].capitalize %> is <%= @weather["main"]["temp"] %> centigrade </p>
+ <p>  The current temperature in <%= params["city"].capitalize %> is <%= @weather[:temperature] %> centigrade. It feels like <%= @weather[:feels_like] %>. Today's low is <%= @weather[:min_temp] %> and the high is <%= @weather[:max_temp] %>  </p>
+
 
