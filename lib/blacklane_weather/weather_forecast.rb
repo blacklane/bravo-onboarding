@@ -2,6 +2,7 @@
 
 require "json"
 require "open-uri"
+require "./lib/errors/invalid_city_error"
 
 class WeatherForecast
   attr_reader :city
@@ -21,6 +22,8 @@ class WeatherForecast
     #  better to return an object
     # define our own structure and provide only what is relevant to expose
     # make a new blacklane_weather instance with specific data
+  rescue OpenURI::HTTPError => e
+    raise Errors::InvalidCityError.new(e, @city)
   end
   # catch exception and re-raise it
 end

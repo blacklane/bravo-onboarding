@@ -32,6 +32,6 @@ RSpec.describe "My App" do
   end
 
   it "raises an error with invalid city" do
-    expect { WeatherForecast.new("abcd").weather_call }.to raise_error(OpenURI::HTTPError)
+    expect { WeatherForecast.new("abcd").weather_call }.to raise_error(Errors::InvalidCityError)
   end
 end
