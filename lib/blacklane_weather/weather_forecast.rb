@@ -3,7 +3,7 @@
 require "json"
 require "open-uri"
 require "./lib/errors/invalid_city_error"
-require_relative 'temperature_data'
+require_relative "temperature_data"
 
 class WeatherForecast
   attr_reader :city
@@ -30,7 +30,8 @@ class WeatherForecast
   private
 
   def temperature_data(weather_data)
-    t = TemperatureData.new(weather_data["main"]["temp"], weather_data["main"]["feels_like"], weather_data["main"]["temp_min"], weather_data["main"]["temp_max"])
+    t = TemperatureData.new(weather_data["main"]["temp"], weather_data["main"]["feels_like"],
+                            weather_data["main"]["temp_min"], weather_data["main"]["temp_max"])
     t.todays_forecast
   end
 end

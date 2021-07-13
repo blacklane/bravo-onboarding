@@ -1,4 +1,6 @@
-require_relative 'weather_forecast'
+# frozen_string_literal: true
+
+require_relative "weather_forecast"
 
 class TemperatureData
   attr_reader :temperature, :feels_like, :min_temp, :max_temp
@@ -18,5 +20,4 @@ class TemperatureData
       max_temp: @max_temp
     }
   end
-
 end

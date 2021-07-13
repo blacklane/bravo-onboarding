@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Errors
   class InvalidCityError < StandardError
     attr_reader :error, :city
