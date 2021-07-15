@@ -15,9 +15,9 @@ get "/" do
 end
 
 post "/weather" do
-  @weather = WeatherForecast.new(params["city"]).weather_call
+  @weather = BlacklaneWeather::WeatherForecast.new(params["city"]).weather_call
   erb(:weather)
   #  rescue any error if not specified
-rescue StandardError
+rescue Errors::InvalidCityError
   erb(:error)
 end

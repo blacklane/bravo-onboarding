@@ -2,15 +2,14 @@
 
 module Errors
   class InvalidCityError < StandardError
-    attr_reader :error, :city
+    attr_reader :city
 
-    def initialize(error, city)
-      @error = error
+    def initialize(city)
       @city = city
     end
 
     def message
-      "No city found, enter a valid city name or check spelling"
+      "#{@city} is not found enter a valid city name or check spelling"
     end
   end
 end

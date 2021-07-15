@@ -12,7 +12,7 @@ RSpec.describe "My App" do
   end
 
   # Use let to reuse Berlin blacklane_weather instance
-  let(:berlin_instance) { WeatherForecast.new("Berlin") }
+  let(:berlin_instance) { BlacklaneWeather::WeatherForecast.new("Berlin") }
 
   it "displays a homepage" do
     get "/"
@@ -25,12 +25,12 @@ RSpec.describe "My App" do
     expect(berlin_weather_data).not_to be_nil
   end
   context "when given Berlin as an argument" do
-    it "returns a hash" do
+    it "returns an object" do
       berlin_weather_data = berlin_instance.weather_call
-      expect(berlin_weather_data).to be_a(Hash)
+      expect(berlin_weather_data).to be_a(Object)
     end
   end
   it "raises an error with invalid city" do
-    expect { WeatherForecast.new("abcd").weather_call }.to raise_error(Errors::InvalidCityError)
+    expect { BlacklaneWeather::WeatherForecast.new("abcd").weather_call }.to raise_error(Errors::InvalidCityError)
   end
 end
