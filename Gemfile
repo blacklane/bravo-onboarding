@@ -15,9 +15,9 @@ group :development, :test do
 
   gem "rspec-autotest"
 
-  #simple cov - https://github.com/simplecov-ruby/simplecov
+  # simple cov - https://github.com/simplecov-ruby/simplecov
   # to run - $ open coverage/index.html
-  gem 'simplecov', require: false
+  gem "simplecov", require: false
 
   gem "webmock"
 

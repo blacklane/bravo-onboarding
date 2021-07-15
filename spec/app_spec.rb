@@ -16,15 +16,22 @@ RSpec.describe "My App" do
 
   let(:invalid_instance) { BlacklaneWeather::WeatherForecast.new("incorrect") }
 
-  let(:api) { "http://api.openweathermap.org/data/2.5/weather?q=Berlin&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}" }
+  let(:api) {
+    "http://api.openweathermap.org/data/2.5/weather?q=Berlin&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
+  }
 
-  let(:incorrect_api) { "http://api.openweathermap.org/data/2.5/weather?q=incorrect&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}" }
+  let(:incorrect_api) {
+    "http://api.openweathermap.org/data/2.5/weather?q=incorrect&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
+  }
 
   let(:status) { 200 }
 
-  let(:body) { {"coord":{"lon":13.4105,"lat":52.5244},"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04d"}],"base":"stations","main":{"temp":27.35,"feels_like":28.13,"temp_min":25.14,"temp_max":28.46,"pressure":1004,"humidity":55},"visibility":10000,"wind":{"speed":3.58,"deg":295,"gust":6.26},"clouds":{"all":75},"dt":1626358147,"sys":{"type":2,"id":2011538,"country":"DE","sunrise":1626318094,"sunset":1626376960},"timezone":7200,"id":2950159,"name":"Berlin","cod":200}.to_json }
+  let(:body) {
+    { "coord": { "lon": 13.4105, "lat": 52.5244 },
+      "weather": [{ "id": 803, "main": "Clouds", "description": "broken clouds", "icon": "04d" }], "base": "stations", "main": { "temp": 27.35, "feels_like": 28.13, "temp_min": 25.14, "temp_max": 28.46, "pressure": 1004, "humidity": 55 }, "visibility": 10_000, "wind": { "speed": 3.58, "deg": 295, "gust": 6.26 }, "clouds": { "all": 75 }, "dt": 1_626_358_147, "sys": { "type": 2, "id": 2_011_538, "country": "DE", "sunrise": 1_626_318_094, "sunset": 1_626_376_960 }, "timezone": 7200, "id": 2_950_159, "name": "Berlin", "cod": 200 }.to_json
+  }
 
-  let(:stub) { stub_request(:get, api).to_return(:status => status, :body => body) }
+  let(:stub) { stub_request(:get, api).to_return(status: status, body: body) }
 
   it "displays a homepage" do
     get "/"
