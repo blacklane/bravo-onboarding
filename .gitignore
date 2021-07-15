@@ -1,0 +1,5 @@
+.idea/
+.rubocop-http*
+.env*
+
+local_env.yml
