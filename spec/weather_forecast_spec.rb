@@ -21,9 +21,13 @@ RSpec.describe "The Weather Forecast class" do
     expect { BlacklaneWeather::WeatherForecast.new }.to raise_error(ArgumentError)
   end
 
-  context "#weather_call" do
-    it "returns an instance of Temperature Data when given a correct city" do
-      expect(berlin_instance.weather_call).to be_an_instance_of(BlacklaneWeather::TemperatureData)
-    end
-  end
+  # it "raises InvalidCityError with invalid city" do
+  #   expect { BlacklaneWeather::WeatherForecast.new("invalid").weather_call }.to raise_error(Errors::InvalidCityError)
+  # end
+
+  # context "#weather_call" do
+  #   it "returns an instance of Temperature Data when given a correct city" do
+  #     expect(berlin_instance.weather_call).to be_an_instance_of(BlacklaneWeather::TemperatureData)
+  #   end
+  # end
 end

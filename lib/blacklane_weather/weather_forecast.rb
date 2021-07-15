@@ -33,8 +33,17 @@ module BlacklaneWeather
     private
 
     def temperature_data(weather_data)
-      BlacklaneWeather::TemperatureData.new(weather_data["main"]["temp"], weather_data["main"]["feels_like"],
+      TemperatureData.new(weather_data["main"]["temp"], weather_data["main"]["feels_like"],
                                             weather_data["main"]["temp_min"], weather_data["main"]["temp_max"])
     end
   end
 end
+
+
+# def stub
+#   stub_request(:get, "http://api.openweathermap.org/data/2.5/weather?q=#{@city}&units=metric&appid=a64896bb4676c4331e621f1940dc623d")
+#
+#   puts Net::HTTP.get("http://api.openweathermap.org/data/2.5/weather?q=#{@city}&units=metric&appid=a64896bb4676c4331e621f1940dc623d", "/")
+# end
+#
+# stub
