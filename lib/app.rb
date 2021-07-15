@@ -18,6 +18,7 @@ post "/weather" do
   @weather = BlacklaneWeather::WeatherForecast.new(params["city"]).weather_call
   erb(:weather)
   #  rescue any error if not specified
-rescue Errors::InvalidCityError
+rescue Errors::InvalidCityError => e
+  @error_message = e.message
   erb(:error)
 end
