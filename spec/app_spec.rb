@@ -3,7 +3,6 @@ ENV["APP_ENV"] = "test"
 require "./lib/app" # <-- my sinatra app
 require "rspec"
 require "rack/test"
-require "rspec/rails"
 
 RSpec.describe "My App" do
   include Rack::Test::Methods
@@ -54,7 +53,6 @@ RSpec.describe "My App" do
     stub_request(:get, incorrect_api).to_return(status: 404, body: '{"cod":"404","message":"city not found"}' )
     post "/error", city: "Invalid"
     expect(last_response.status).to eq(404)
-    expect(response).to render_template(:error)
   end
 end
 
