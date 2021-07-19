@@ -47,9 +47,9 @@ RSpec.describe "My App" do
 
   it "displays the error page with invalid city" do
     stub_request(:get, incorrect_api).to_return(status: 404, body: '{"cod":"404","message":"city not found"}')
-    # binding.pry
+    binding.pry
     post "/weather", city: "Invalid"
-    expect(last_response.status).to eq(200)
+    expect(last_response.status).to eq(404)
     expect(last_response.body).to match(/Invalid is not found/)
   end
 end
