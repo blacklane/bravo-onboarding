@@ -10,10 +10,6 @@ RSpec.describe "My App" do
   let(:berlin_city) { "Berlin" }
   let(:invalid_city) { "Invalid" }
 
-  let(:berlin_instance) { BlacklaneWeather::WeatherForecast.new(berlin_city) }
-
-  let(:invalid_instance) { BlacklaneWeather::WeatherForecast.new(invalid_city) }
-
   let(:api) {
     "http://api.openweathermap.org/data/2.5/weather?q=#{berlin_city}&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
   }
@@ -38,19 +34,20 @@ RSpec.describe "My App" do
   it "displays a homepage" do
     get "/"
     expect(last_response).to be_ok
-    expect(last_response.body).to include("City")
+    expect(last_response.body).to match(/City/)
   end
 
   it "displays temperature for berlin" do
     stub
     post "/weather", city: "Berlin"
     expect(last_response.status).to eq(200)
-    expect(last_response.body).to include("Berlin")
+    expect(last_response.body).to match(/The current temperature in Berlin/)
   end
 
   it "displays the error page with invalid city" do
     stub_request(:get, incorrect_api).to_return(status: 404, body: '{"cod":"404","message":"city not found"}')
-    post "/error", city: "Invalid"
-    expect(last_response.status).to eq(404)
+    post "/weather", city: "Invalid"
+    expect(last_response.status).to eq(200)
+    expect(last_response.body).to match(/Invalid is not found/)
   end
 end

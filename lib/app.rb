@@ -19,7 +19,6 @@ post "/weather" do
   erb(:weather)
   #  rescue any error if not specified
 rescue Errors::InvalidCityError => e
-  # raise
   @error_message = e.message
   erb(:error)
 end
