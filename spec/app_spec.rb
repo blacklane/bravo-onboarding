@@ -35,7 +35,6 @@ RSpec.describe "My App" do
     Sinatra::Application
   end
 
-
   it "displays a homepage" do
     get "/"
     expect(last_response).to be_ok
@@ -50,9 +49,8 @@ RSpec.describe "My App" do
   end
 
   it "displays the error page with invalid city" do
-    stub_request(:get, incorrect_api).to_return(status: 404, body: '{"cod":"404","message":"city not found"}' )
+    stub_request(:get, incorrect_api).to_return(status: 404, body: '{"cod":"404","message":"city not found"}')
     post "/error", city: "Invalid"
     expect(last_response.status).to eq(404)
   end
 end
-

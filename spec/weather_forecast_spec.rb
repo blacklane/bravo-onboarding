@@ -62,7 +62,7 @@ RSpec.describe "The Weather Forecast class" do
   end
 
   it "raises an error with invalid city", :skip_before do
-    stub_request(:get, incorrect_api).to_return(status: 404, body: '{"cod":"404","message":"city not found"}' )
+    stub_request(:get, incorrect_api).to_return(status: 404, body: '{"cod":"404","message":"city not found"}')
 
     expect { invalid_instance.weather_call }.to raise_error(Errors::InvalidCityError)
   end
