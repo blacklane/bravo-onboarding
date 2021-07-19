@@ -3,6 +3,7 @@ ENV["APP_ENV"] = "test"
 require "./lib/app" # <-- my sinatra app
 require "rspec"
 require "rack/test"
+require "pry-byebug"
 
 RSpec.describe "My App" do
   include Rack::Test::Methods
@@ -46,6 +47,7 @@ RSpec.describe "My App" do
 
   it "displays the error page with invalid city" do
     stub_request(:get, incorrect_api).to_return(status: 404, body: '{"cod":"404","message":"city not found"}')
+    # binding.pry
     post "/weather", city: "Invalid"
     expect(last_response.status).to eq(200)
     expect(last_response.body).to match(/Invalid is not found/)

@@ -26,4 +26,6 @@ group :development, :test do
   end
 
   gem "capybara"
+
+  gem "pry-byebug"
 end
