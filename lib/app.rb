@@ -20,5 +20,6 @@ post "/weather" do
   #  rescue any error if not specified
 rescue Errors::InvalidCityError => e
   @error_message = e.message
+  status 404
   erb(:error)
 end

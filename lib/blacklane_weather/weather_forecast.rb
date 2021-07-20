@@ -16,11 +16,9 @@ module BlacklaneWeather
 
     def weather_call
       api = "http://api.openweathermap.org/data/2.5/weather?q=#{@city}&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
-      # api = "http://api.openweathermap.org/data/2.5/weather?q=#{@city}&units=metric&appid=a64896bb4676c4331e621f1940dc623d"
 
       uri = URI(api)
       http_response = Net::HTTP.get_response(uri)
-
 
       if http_response.is_a?(Net::HTTPSuccess)
         weather_data = JSON.parse(http_response.body)
@@ -33,8 +31,8 @@ module BlacklaneWeather
     private
 
     def temperature_data(weather_data)
-      BlacklaneWeather::TemperatureData.new(weather_data["main"]["temp"], weather_data["main"]["feels_like"],
-                                            weather_data["main"]["temp_min"], weather_data["main"]["temp_max"])
+      TemperatureData.new(weather_data["main"]["temp"], weather_data["main"]["feels_like"],
+                          weather_data["main"]["temp_min"], weather_data["main"]["temp_max"])
     end
   end
 end

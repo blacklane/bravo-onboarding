@@ -3,34 +3,53 @@ ENV["APP_ENV"] = "test"
 require "./lib/app" # <-- my sinatra app
 require "rspec"
 require "rack/test"
+require "pry-byebug"
 
 RSpec.describe "My App" do
   include Rack::Test::Methods
+
+  let(:berlin_city) { "Berlin" }
+  let(:invalid_city) { "Invalid" }
+
+  let(:api) {
+    "http://api.openweathermap.org/data/2.5/weather?q=#{berlin_city}&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
+  }
+
+  let(:incorrect_api) {
+    "http://api.openweathermap.org/data/2.5/weather?q=#{invalid_city}&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
+  }
+
+  let(:status) { 200 }
+
+  let(:body) {
+    { "coord": { "lon": 13.4105, "lat": 52.5244 },
+      "weather": [{ "id": 803, "main": "Clouds", "description": "broken clouds", "icon": "04d" }], "base": "stations", "main": { "temp": 27.35, "feels_like": 28.13, "temp_min": 25.14, "temp_max": 28.46, "pressure": 1004, "humidity": 55 }, "visibility": 10_000, "wind": { "speed": 3.58, "deg": 295, "gust": 6.26 }, "clouds": { "all": 75 }, "dt": 1_626_358_147, "sys": { "type": 2, "id": 2_011_538, "country": "DE", "sunrise": 1_626_318_094, "sunset": 1_626_376_960 }, "timezone": 7200, "id": 2_950_159, "name": "Berlin", "cod": 200 }.to_json
+  }
+
+  let(:stub) { stub_request(:get, api).to_return(status: status, body: body) }
 
   def app
     Sinatra::Application
   end
 
-  # Use let to reuse Berlin blacklane_weather instance
-  let(:berlin_instance) { BlacklaneWeather::WeatherForecast.new("Berlin") }
-
   it "displays a homepage" do
     get "/"
     expect(last_response).to be_ok
+    expect(last_response.body).to match(/City/)
   end
 
-  it "returns an object when a proper city is given" do
-    berlin_weather_data = berlin_instance.weather_call
-    #  expect this to return an object, not specifically a json.
-    expect(berlin_weather_data).not_to be_nil
+  it "displays temperature for berlin" do
+    stub
+    post "/weather", city: "Berlin"
+    expect(last_response.status).to eq(200)
+    expect(last_response.body).to match(/The current temperature in Berlin/)
   end
-  context "when given Berlin as an argument" do
-    it "returns an object" do
-      berlin_weather_data = berlin_instance.weather_call
-      expect(berlin_weather_data).to be_a(Object)
-    end
-  end
-  it "raises an error with invalid city" do
-    expect { BlacklaneWeather::WeatherForecast.new("abcd").weather_call }.to raise_error(Errors::InvalidCityError)
+
+  it "displays the error page with invalid city" do
+    stub_request(:get, incorrect_api).to_return(status: 404, body: '{"cod":"404","message":"city not found"}')
+    # binding.pry
+    post "/weather", city: "Invalid"
+    expect(last_response.status).to eq(404)
+    expect(last_response.body).to match(/Invalid is not found/)
   end
 end
