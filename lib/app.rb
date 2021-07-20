@@ -9,6 +9,7 @@ require "dotenv/load"
 
 require_relative "./blacklane_weather/weather_forecast"
 require_relative "./errors/invalid_city_error"
+require_relative "./map/mapbox"
 
 get "/" do
   erb :index
@@ -23,3 +24,4 @@ rescue Errors::InvalidCityError => e
   status 404
   erb(:error)
 end
+

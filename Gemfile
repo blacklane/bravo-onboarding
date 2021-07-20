@@ -8,6 +8,10 @@ gem "sinatra-contrib"
 
 gem "dotenv"
 
+gem "json"
+
+gem "geocoder"
+
 group :development, :test do
   gem "rack-test"
 

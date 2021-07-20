@@ -61,7 +61,9 @@ GEM
     diff-lcs (1.4.4)
     docile (1.4.0)
     dotenv (2.7.6)
+    geocoder (1.6.7)
     hashdiff (1.0.1)
+    json (2.5.1)
     method_source (1.0.0)
     mini_mime (1.1.0)
     multi_json (1.15.0)
@@ -119,6 +121,8 @@ PLATFORMS
 DEPENDENCIES
   capybara
   dotenv
+  geocoder
+  json
   pry-byebug
   rack-test
   rake

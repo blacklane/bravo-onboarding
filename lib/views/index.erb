@@ -1,8 +1,29 @@
-
-
 <form action="/weather" method="post">
   <label for="city">City</label>
   <input type="text" id="city" name="city">
   <input type="submit" value="Submit">
 </form>
 
+<div class="map">
+  <div id='map' style='width: 400px; height: 300px;'></div>
+  <script>
+      mapboxgl.accessToken = 'pk.eyJ1IjoianNpZW1lbnMiLCJhIjoiY2tyYzJubzl4NHZzZTJ1cWhzOXdlMG9yeiJ9.YHohGf-MCj8k_T4X40j1IQ';
+      var map = new mapboxgl.Map({
+          container: 'map', // container ID
+          style: 'mapbox://styles/mapbox/streets-v11', // style URL
+          center: [0.12, 51.50], // starting position [lng, lat]
+          zoom: 9 // starting zoom
+      });
+      marker = new mapboxgl.Marker({
+          draggable: true
+      })
+          .setLngLat([0.12, 51.5])
+          .addTo(map);
+  </script>
+  <h2 id="my_weather">Weather in</h2>
+  <p id="current_temp">Current Temperature: </p>
+  <p id="feels_like">Feels like: </p>
+  <p id="temp_high">Today's high: </p>
+  <p id="temp_low">Todays low: </p>
+
+</div>
