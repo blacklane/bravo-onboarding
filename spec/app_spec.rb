@@ -40,7 +40,7 @@ RSpec.describe "My App" do
 
   it "displays temperature for berlin" do
     stub
-    post "/weather", city: "Berlin"
+    post "/weather", city: berlin_city
     expect(last_response.status).to eq(200)
     expect(last_response.body).to match(/The current temperature in Berlin/)
   end
@@ -48,7 +48,7 @@ RSpec.describe "My App" do
   it "displays the error page with invalid city" do
     stub_request(:get, incorrect_api).to_return(status: 404, body: '{"cod":"404","message":"city not found"}')
     # binding.pry
-    post "/weather", city: "Invalid"
+    post "/weather", city: invalid_city
     expect(last_response.status).to eq(404)
     expect(last_response.body).to match(/Invalid is not found/)
   end
