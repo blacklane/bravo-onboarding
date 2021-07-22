@@ -24,10 +24,20 @@ module BlacklaneWeather
       temperature_data(weather_data)
     end
 
+    def self.coordinates_weather_call(lat, lon)
+      api = "http://api.openweathermap.org/data/2.5/weather?lat=#{lat}&lon=#{lon}&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
+
+      uri = URI(api)
+      http_response = Net::HTTP.get_response(uri)
+      weather_data = JSON.parse(http_response.body)
+      c = WeatherForecast.new(weather_data["name"])
+      c.weather_call
+    end
+
     private
 
     def temperature_data(weather_data)
-      TemperatureData.new(weather_data["main"]["temp"], weather_data["main"]["feels_like"],
+      TemperatureData.new(weather_data["name"], weather_data["coord"]["lat"], weather_data["coord"]["lon"], weather_data["main"]["temp"], weather_data["main"]["feels_like"],
                           weather_data["main"]["temp_min"], weather_data["main"]["temp_max"])
     end
 
