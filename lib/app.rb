@@ -22,8 +22,8 @@ post "/" do
     @json = @weather.build_json
     erb(:index)
   elsif params[:lat] && params[:lon]
-      weather_instance = BlacklaneWeather::WeatherForecast.coordinates_weather_call(params["lat"], params["lon"])
-      @json = weather_instance.build_json
+    @weather = BlacklaneWeather::WeatherForecast.coordinates_weather_call(params["lat"], params["lon"])
+    @json = @weather.build_json
     erb(:index)
   end
   #  rescue any error if not specified

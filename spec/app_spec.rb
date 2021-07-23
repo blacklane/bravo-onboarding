@@ -54,16 +54,16 @@ RSpec.describe "My App" do
   it "displays temperature for berlin" do
     coordinates_stub
     stub
-    post "/weather", city: berlin_city
+    post "/", city: berlin_city
     expect(last_response.status).to eq(200)
-    expect(last_response.body).to match(/The current temperature in #{berlin_city}/)
+    expect(last_response.body).to match(/Weather in #{berlin_city}/)
   end
 
   it "displays the error page with invalid city" do
     stub_request(:get, invalid_coordinates_api).to_return(status: status, body: '[]')
     stub_request(:get, invalid_weather_api).to_return(status: 404, body: '{"cod":"404","message":"city not found"}')
     # binding.pry
-    post "/weather", city: invalid_city
+    post "/", city: invalid_city
     expect(last_response.status).to eq(404)
     expect(last_response.body).to match(/#{invalid_city} is not found/)
   end

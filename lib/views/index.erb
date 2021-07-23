@@ -14,28 +14,17 @@
 
 <div class="map">
   <div id='map' style='width: 400px; height: 300px;'></div>
-  <script>
-      mapboxgl.accessToken = 'pk.eyJ1IjoianNpZW1lbnMiLCJhIjoiY2tyYzJubzl4NHZzZTJ1cWhzOXdlMG9yeiJ9.YHohGf-MCj8k_T4X40j1IQ';
-      var map = new mapboxgl.Map({
-          container: 'map', // container ID
-          style: 'mapbox://styles/mapbox/streets-v11', // style URL
-          center: [0.12, 51.50], // starting position [lng, lat]
-          zoom: 8 // starting zoom
-      });
-      marker = new mapboxgl.Marker({
-          draggable: false
-      })
-          .setLngLat([0.12, 51.5])
-          .addTo(map);
-  </script>
 </div>
 
-<h2 id="my_weather">Weather in</h2>
-<p id="current_temp">Current Temperature: </p>
-<p id="feels_like">Feels like: </p>
-<p id="temp_high">Today's high: </p>
-<p id="temp_low">Todays low: </p>
+<% if @weather %>
+  <h2 id="my_weather">Weather in <%= @weather.city %></h2>
+  <p id="current_temp">Current Temperature: <%= @weather.temperature %></p>
+  <p id="feels_like">Feels like: <%= @weather.feels_like %></p>
+  <p id="temp_high">Today's high: <%= @weather.max_temp %></p>
+  <p id="temp_low">Todays low: <%= @weather.min_temp %></p>
+<% end %>
 
 <p id="weather_data" hidden><%= @json %></p>
+
 
 <script src="javascript/index.js" type="text/javascript"></script>
