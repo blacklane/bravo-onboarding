@@ -4,23 +4,23 @@ require_relative "weather_forecast"
 
 module BlacklaneWeather
   class TemperatureData
-    attr_reader :city, :lat, :lon, :temperature, :feels_like, :min_temp, :max_temp
+    attr_reader :city, :lat, :lng, :temperature, :feels_like, :min_temp, :max_temp
 
-    def initialize(city, lat, lon, temperature, feels_like, min_temp, max_temp)
+    def initialize(city, lat, lng, temperature, feels_like, min_temp, max_temp)
       @city = city
       @lat = lat
-      @lon = lon
+      @lng = lng
       @temperature = temperature
       @feels_like = feels_like
       @min_temp = min_temp
       @max_temp = max_temp
     end
 
-    def build_json
+    def to_json(*_args)
       weather = {
         city: @city,
         lat: @lat,
-        lon: @lon,
+        lng: @lng,
         temperature: @temperature,
         feels_like: @feels_like,
         min_temp: @min_temp,

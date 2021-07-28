@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "sinatra"
+require "sinatra/json"
 require "json"
 require "open-uri"
 require "sinatra/reloader"
@@ -15,18 +16,17 @@ get "/" do
   erb :index
 end
 
-post "/" do
-  if params[:city]
-    weather_instance = BlacklaneWeather::WeatherForecast.new(params["city"])
+post "/weather" do
+  payload = JSON.parse(request.body.read)
+  puts payload
+  if payload["city"]
+    weather_instance = BlacklaneWeather::WeatherForecast.new(payload["city"])
     @weather = weather_instance.weather_call
-    @json = @weather.build_json
-    erb(:index)
-  elsif params[:lat] && params[:lon]
-    @weather = BlacklaneWeather::WeatherForecast.coordinates_weather_call(params["lat"], params["lon"])
-    @json = @weather.build_json
-    erb(:index)
+    @json = @weather.to_json
+  else
+    @weather = BlacklaneWeather::WeatherForecast.coordinates_weather_call(payload["lat"], payload["lng"])
+    @json = @weather.to_json
   end
-  #  rescue any error if not specified
 rescue Errors::InvalidCityError => e
   @error_message = e.message
   status(404)

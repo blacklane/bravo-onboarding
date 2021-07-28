@@ -1,30 +1,46 @@
-<form action="/" method="post" id="city_form">
-  <label for="city">City</label>
-  <input type="text" id="city" name="city">
-  <input type="submit" value="Submit">
-</form>
+<div class="container container-main">
+  <form action="/" method="post" id="city_form">
+    <label for="city"></label>
+    <input type="text" id="city" name="city" placeholder="Enter a city">
+    <input type="submit" value="Submit">
+  </form>
 
-<form action="/" method="post" id="coords_form" hidden>
-  <label for="lat">Latitude</label>
-  <input type="text" id="lat" name="lat">
-  <label for="lon">Longitude</label>
-  <input type="text" id="lon" name="lon">
-  <input type="submit" value="Submit">
-</form>
+  <form action="/" method="post" id="coords_form" hidden>
+    <label for="lat">Latitude</label>
+    <input type="text" id="lat" name="lat">
+    <label for="lng">Longitude</label>
+    <input type="text" id="lng" name="lng">
+    <input type="submit" value="Submit">
+  </form>
 
-<div class="map">
-  <div id='map' style='width: 400px; height: 300px;'></div>
+  <div class="map">
+    <div id='map' style='width: 400px; height: 300px;'></div>
+  </div>
+
+  <% if @weather %>
+    <div class="card-weather">
+      <% if params[:city] %>
+        <h4 id="my_weather">Weather in <%= @weather.city %> </h4>
+      <% end %>
+      <h4 id="my_weather"></h4>
+      <p id="current_temp">Current Temperature: <%= @weather.temperature %></p>
+      <p id="feels_like">Feels like: <%= @weather.feels_like %></p>
+      <p id="temp_high">Today's high: <%= @weather.max_temp %></p>
+      <p id="temp_low">Todays low: <%= @weather.min_temp %></p>
+    </div>
+  <% else %>
+    <div class="card-weather">
+      <% if params[:city] %>
+        <h4 id="my_weather">Weather in</h4>
+      <% end %>
+      <h4 id="my_weather"></h4>
+      <p id="current_temp">Current Temperature:</p>
+      <p id="feels_like">Feels like:</p>
+      <p id="temp_high">Today's high:</p>
+      <p id="temp_low">Todays low:</p>
+    </div>
+  <% end %>
+
+  <p id="weather_data" hidden><%= @json %></p>
 </div>
-
-<% if @weather %>
-  <h2 id="my_weather">Weather in <%= @weather.city %></h2>
-  <p id="current_temp">Current Temperature: <%= @weather.temperature %></p>
-  <p id="feels_like">Feels like: <%= @weather.feels_like %></p>
-  <p id="temp_high">Today's high: <%= @weather.max_temp %></p>
-  <p id="temp_low">Todays low: <%= @weather.min_temp %></p>
-<% end %>
-
-<p id="weather_data" hidden><%= @json %></p>
-
-
 <script src="javascript/index.js" type="text/javascript"></script>

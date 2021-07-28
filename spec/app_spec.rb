@@ -68,3 +68,10 @@ RSpec.describe "My App" do
     expect(last_response.body).to match(/#{invalid_city} is not found/)
   end
 end
+
+RSpec.describe "System", type: :feature do
+  include Rack::Test::Methods
+  it "visits homepage" do
+    visit "/"
+  end
+end

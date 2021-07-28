@@ -4,3 +4,5 @@
 require "./lib/app"
 
 run Sinatra::Application
+
+Capybara.app = "./lib/app"

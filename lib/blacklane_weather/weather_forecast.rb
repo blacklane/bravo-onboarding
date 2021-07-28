@@ -16,7 +16,7 @@ module BlacklaneWeather
 
     def weather_call
       coordinates = location_coordinates
-      api = "http://api.openweathermap.org/data/2.5/weather?lat=#{coordinates[:lat]}&lon=#{coordinates[:lon]}&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
+      api = "http://api.openweathermap.org/data/2.5/weather?lat=#{coordinates[:lat]}&lon=#{coordinates[:lng]}&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
 
       uri = URI(api)
       http_response = Net::HTTP.get_response(uri)
@@ -24,8 +24,8 @@ module BlacklaneWeather
       temperature_data(weather_data)
     end
 
-    def self.coordinates_weather_call(lat, lon)
-      api = "http://api.openweathermap.org/data/2.5/weather?lat=#{lat}&lon=#{lon}&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
+    def self.coordinates_weather_call(lat, lng)
+      api = "http://api.openweathermap.org/data/2.5/weather?lat=#{lat}&lon=#{lng}&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
 
       uri = URI(api)
       http_response = Net::HTTP.get_response(uri)
@@ -51,7 +51,7 @@ module BlacklaneWeather
       else
         latitude = geo_json[0]["lat"]
         longitude = geo_json[0]["lon"]
-        { lat: latitude, lon: longitude }
+        { lat: latitude, lng: longitude }
       end
     end
   end
