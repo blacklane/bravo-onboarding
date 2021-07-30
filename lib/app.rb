@@ -18,15 +18,19 @@ end
 
 post "/weather" do
   payload = JSON.parse(request.body.read)
-  puts payload
-  if payload["city"]
-    weather_instance = BlacklaneWeather::WeatherForecast.new(payload["city"])
-    @weather = weather_instance.weather_call
-    @json = @weather.to_json
-  else
-    @weather = BlacklaneWeather::WeatherForecast.coordinates_weather_call(payload["lat"], payload["lng"])
-    @json = @weather.to_json
-  end
+  weather_instance = BlacklaneWeather::WeatherForecast.new(payload["city"])
+  @weather = weather_instance.weather_call
+  @json = @weather.to_json
+rescue Errors::InvalidCityError => e
+  @error_message = e.message
+  status(404)
+  erb(:error)
+end
+
+post "/coordinates" do
+  payload = JSON.parse(request.body.read)
+  @weather = BlacklaneWeather::WeatherForecast.coordinates_weather_call(payload["lat"], payload["lng"])
+  @json = @weather.to_json
 rescue Errors::InvalidCityError => e
   @error_message = e.message
   status(404)

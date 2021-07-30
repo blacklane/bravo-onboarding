@@ -12,3 +12,8 @@
     width: 400px;
     margin: auto;
 }
+
+#error_message {
+    color: red;
+    margin-top: 4px;
+}

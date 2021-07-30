@@ -4,6 +4,8 @@ require "./lib/app" # <-- my sinatra app
 require "rspec"
 require "rack/test"
 require "pry-byebug"
+require "capybara"
+require "capybara/dsl"
 
 RSpec.describe "My App" do
   include Rack::Test::Methods
@@ -67,11 +69,12 @@ RSpec.describe "My App" do
     expect(last_response.status).to eq(404)
     expect(last_response.body).to match(/#{invalid_city} is not found/)
   end
-end
 
-RSpec.describe "System", type: :feature do
-  include Rack::Test::Methods
-  it "visits homepage" do
-    visit "/"
+  describe "visit home", type: :feature do
+    it "works" do
+      visit "/"
+      expect(page).to have_content("City")
+    end
   end
 end
+
