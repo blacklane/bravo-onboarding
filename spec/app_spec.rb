@@ -8,7 +8,8 @@ require "capybara"
 require "capybara/dsl"
 
 RSpec.describe "My App" do
-  include Rack::Test::Methods
+  # include Rack::Test::Methods
+  include Capybara::DSL
 
   let(:berlin_city) { "Berlin" }
   let(:berlin_coordinates) { { lat: 52.5244, lon: 13.4105 } }
@@ -47,16 +48,20 @@ RSpec.describe "My App" do
     Sinatra::Application
   end
 
+  def setup
+    Capybara.app = Sinatra::Application.new
+  end
+
   it "displays a homepage" do
     get "/"
     expect(last_response).to be_ok
-    expect(last_response.body).to match(/City/)
+    expect(last_response.body).to match(/Enter a city/)
   end
 
   it "displays temperature for berlin" do
     coordinates_stub
     stub
-    post "/", city: berlin_city
+    post "/weather", city: berlin_city
     expect(last_response.status).to eq(200)
     expect(last_response.body).to match(/Weather in #{berlin_city}/)
   end
