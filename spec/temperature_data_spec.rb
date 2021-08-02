@@ -3,6 +3,7 @@ ENV["APP_ENV"] = "test"
 require "./lib/blacklane_weather/temperature_data"
 require "rspec"
 require "rack/test"
+require "spec_helper"
 
 RSpec.describe "The Temperature Data class" do
   # Use let to reuse Berlin blacklane_weather instance

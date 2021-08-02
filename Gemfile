@@ -12,12 +12,16 @@ gem "json"
 
 gem "geocoder"
 
+gem "rack-contrib"
+
 group :development, :test do
   gem "rack-test"
 
   gem "rake"
 
   gem "rspec-autotest"
+
+  gem "rubocop"
 
   # simple cov - https://github.com/simplecov-ruby/simplecov
   # to run - $ open coverage/index.html
@@ -32,4 +36,10 @@ group :development, :test do
   gem "capybara"
 
   gem "pry-byebug"
+
+  gem "test-unit"
+
+  gem "selenium-webdriver"
+
+  gem "puma"
 end
