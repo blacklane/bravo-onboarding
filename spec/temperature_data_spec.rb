@@ -6,7 +6,6 @@ require "rack/test"
 require "spec_helper"
 
 RSpec.describe "The Temperature Data class" do
-  # Use let to reuse Berlin blacklane_weather instance
   let(:temperature_instance) { BlacklaneWeather::TemperatureData.new(20, 21, 18, 23, 24, 20, 26, "cloudy", "2d") }
 
   it "creates a new instance of GetWeather" do
