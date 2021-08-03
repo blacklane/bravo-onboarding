@@ -5,7 +5,6 @@ require "./lib/blacklane_weather/temperature_data"
 require "rspec"
 require "rack/test"
 
-
 RSpec.describe BlacklaneWeather::WeatherForecast do
   include_context "helpers"
 

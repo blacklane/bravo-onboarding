@@ -8,7 +8,6 @@ require "capybara"
 require "capybara/dsl"
 require "spec_helper"
 
-
 RSpec.describe "My App" do
   include Rack::Test::Methods
   include_context "helpers"
@@ -41,7 +40,6 @@ RSpec.describe "My App" do
   end
 
   it "displays temperature with valid coordinates" do
-    coordinates_stub
     stub
     post "/coordinates", { lat: 52.5244, lng: 13.4105 }
     expect(last_response.status).to eq(200)

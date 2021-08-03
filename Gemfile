@@ -14,6 +14,8 @@ gem "geocoder"
 
 gem "rack-contrib"
 
+gem "puma"
+
 group :development, :test do
   gem "rack-test"
 
@@ -40,6 +42,4 @@ group :development, :test do
   gem "test-unit"
 
   gem "selenium-webdriver"
-
-  gem "puma"
 end

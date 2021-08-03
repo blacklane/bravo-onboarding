@@ -120,7 +120,6 @@ RSpec.shared_context "helpers" do
   let(:berlin_instance) { BlacklaneWeather::WeatherForecast.new(berlin_city) }
   let(:london_instance) { BlacklaneWeather::WeatherForecast.new(london_city) }
 
-
   let(:invalid_instance) { BlacklaneWeather::WeatherForecast.new(invalid_city) }
 
   let(:weather_api) {
