@@ -43,7 +43,9 @@ module BlacklaneWeather
                           weather_data["main"]["temp"], \
                           weather_data["main"]["feels_like"], \
                           weather_data["main"]["temp_min"], \
-                          weather_data["main"]["temp_max"])
+                          weather_data["main"]["temp_max"], \
+                          weather_data["weather"][0]["description"], \
+                          weather_data["weather"][0]["icon"])
     end
 
     private

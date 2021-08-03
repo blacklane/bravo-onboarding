@@ -9,9 +9,13 @@ require "dotenv"
 require "dotenv/load"
 require "rack/contrib"
 
+
 require_relative "./blacklane_weather/weather_forecast"
 require_relative "./blacklane_weather/temperature_data"
 require_relative "./errors/invalid_city_error"
+
+set :bind, '0.0.0.0'
+
 
 use Rack::JSONBodyParser, media: /json/
 

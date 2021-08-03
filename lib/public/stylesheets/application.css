@@ -11,6 +11,8 @@
     text-align: left;
     width: 400px;
     margin: auto;
+    display: flex;
+    justify-content: space-between;
 }
 
 #error_message {
