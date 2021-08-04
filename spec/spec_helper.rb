@@ -148,7 +148,7 @@ RSpec.shared_context "helpers" do
       "cod": 200 }.to_json
   }
 
-  let(:stub) { stub_request(:get, weather_api).to_return(status: status, body: body) }
+  let(:weather_stub) { stub_request(:get, weather_api).to_return(status: status, body: body) }
 
   let(:coordinates_api) {
     "http://api.openweathermap.org/geo/1.0/direct?q=#{berlin_city}&limit=1&appid=#{ENV['OPENWEATHER_API_KEY']}"

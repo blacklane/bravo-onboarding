@@ -24,7 +24,7 @@ RSpec.describe "My App" do
 
   it "displays temperature for berlin" do
     coordinates_stub
-    stub
+    weather_stub
     post "/weather", city: berlin_city
     expect(last_response.status).to eq(200)
     expect(last_response.body).to include("{\"city\":\"Berlin\"")
@@ -39,7 +39,7 @@ RSpec.describe "My App" do
   end
 
   it "displays temperature with valid coordinates" do
-    stub
+    weather_stub
     post "/coordinates", { lat: 52.5244, lng: 13.4105 }
     expect(last_response.status).to eq(200)
   end

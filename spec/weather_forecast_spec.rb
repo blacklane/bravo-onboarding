@@ -11,11 +11,8 @@ RSpec.describe BlacklaneWeather::WeatherForecast do
   before do |e|
     unless e.metadata[:skip_before]
       coordinates_stub
-      stub
+      weather_stub
     end
-  end
-
-  it "test stub" do
   end
 
   it "returns a Temperature Data object with correct data" do

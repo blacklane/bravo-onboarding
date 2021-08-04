@@ -29,7 +29,7 @@ RSpec.describe "System" do
 
   context "when inputing a valid city", js: true do
     it "displays the weather information" do
-      stub
+      weather_stub
       visit "/"
       fill_in "city", with: london_city
       click_button("city_form")
