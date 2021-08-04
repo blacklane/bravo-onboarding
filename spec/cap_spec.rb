@@ -5,6 +5,7 @@ require "capybara"
 require "capybara/dsl"
 require "test/unit"
 require "spec_helper"
+require "i18n"
 
 RSpec.describe "System" do
   include Capybara::DSL
@@ -44,6 +45,13 @@ RSpec.describe "System" do
       click_button("city_form")
       expect(page).to have_css("#error_message")
       expect(page).to have_content("#{invalid_city} is not found. Enter a valid city name or check spelling")
+    end
+  end
+
+  context 'when the users locale is en, de, or fr' do
+    it 'displays a translated weather heading', js: true do
+      visit "/"
+      expect(page).to have_content I18n.t(:weather_in)
     end
   end
 end

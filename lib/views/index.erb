@@ -1,8 +1,8 @@
 <div class="container container-main">
-  <input type="text" id="city" name="city" placeholder="Enter a city">
-  <button id="city_form">Submit</button>
+  <input type="text" id="city" name="city" placeholder="<%= I18n.t(:enter_city) %>">
+  <button id="city_form"><%= I18n.t(:submit) %></button>
   <br>
-  <p id="error_message"></p>
+  <p id="error_message"> <%= I18n.t(:error) %></p>
 
   <div class="map">
     <div id='map' style='width: 400px; height: 300px;'></div>
@@ -10,15 +10,12 @@
 
   <div class="card-weather">
     <div class="card_weather_information">
-      <% if params[:city] %>
-        <h4 id="my_weather">Weather in</h4>
-      <% end %>
-      <h4 id="my_weather">Weather in</h4>
-      <p id="current_temp">Current Temperature:</p>
-      <p id="feels_like">Feels like:</p>
-      <p id="weather_description">Currently: </p>
-      <p id="temp_high">Today's high:</p>
-      <p id="temp_low">Todays low:</p>
+      <h4><%= I18n.t(:weather_in) %> <span id="my_weather"></span> </h4>
+      <p><%= I18n.t(:current_temp) %>: <span id="current_temp"></span></p>
+      <p><%= I18n.t(:feels_like) %>: <span id="feels_like"></span></p>
+      <p><%= I18n.t(:current_status) %>: <span id="weather_description"></span></p>
+      <p><%= I18n.t(:temp_high) %>: <span id="temp_high"></span></p>
+      <p><%= I18n.t(:temp_low) %>: <span id="temp_low"></span></p>
     </div>
     <div class="weather_icon">
       <img id="weather_icon" src="" alt="">

@@ -16,6 +16,8 @@ gem "rack-contrib"
 
 gem "puma"
 
+gem "i18n"
+
 group :development, :test do
   gem "rack-test"
 

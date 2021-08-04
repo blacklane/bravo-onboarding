@@ -13,6 +13,10 @@ require_relative "./blacklane_weather/weather_forecast"
 require_relative "./blacklane_weather/temperature_data"
 require_relative "./errors/invalid_city_error"
 
+require "i18n"
+
+I18n.load_path << Dir[File.expand_path("./config/locales") + "/*.yml"]
+
 set :bind, "0.0.0.0"
 
 use Rack::JSONBodyParser, media: /json/
