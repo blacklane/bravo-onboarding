@@ -1,0 +1,21 @@
+.container-main {
+    margin: 20vh auto;
+    text-align: center;
+}
+
+#map {
+    margin: 20px auto;
+}
+
+.card-weather {
+    text-align: left;
+    width: 400px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+#error_message {
+    color: red;
+    margin-top: 4px;
+}

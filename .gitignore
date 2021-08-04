@@ -5,3 +5,7 @@
 local_env.yml
 
 coverage
+
+config.js
+
+node_modules

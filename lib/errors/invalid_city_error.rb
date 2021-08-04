@@ -5,6 +5,7 @@ module Errors
     attr_reader :city
 
     def initialize(city)
+      super
       @city = city
     end
 

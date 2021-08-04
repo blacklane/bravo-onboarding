@@ -4,29 +4,13 @@ require "./lib/app" # <-- my sinatra app
 require "rspec"
 require "rack/test"
 require "pry-byebug"
+require "capybara"
+require "capybara/dsl"
+require "spec_helper"
 
 RSpec.describe "My App" do
   include Rack::Test::Methods
-
-  let(:berlin_city) { "Berlin" }
-  let(:invalid_city) { "Invalid" }
-
-  let(:api) {
-    "http://api.openweathermap.org/data/2.5/weather?q=#{berlin_city}&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
-  }
-
-  let(:incorrect_api) {
-    "http://api.openweathermap.org/data/2.5/weather?q=#{invalid_city}&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
-  }
-
-  let(:status) { 200 }
-
-  let(:body) {
-    { "coord": { "lon": 13.4105, "lat": 52.5244 },
-      "weather": [{ "id": 803, "main": "Clouds", "description": "broken clouds", "icon": "04d" }], "base": "stations", "main": { "temp": 27.35, "feels_like": 28.13, "temp_min": 25.14, "temp_max": 28.46, "pressure": 1004, "humidity": 55 }, "visibility": 10_000, "wind": { "speed": 3.58, "deg": 295, "gust": 6.26 }, "clouds": { "all": 75 }, "dt": 1_626_358_147, "sys": { "type": 2, "id": 2_011_538, "country": "DE", "sunrise": 1_626_318_094, "sunset": 1_626_376_960 }, "timezone": 7200, "id": 2_950_159, "name": "Berlin", "cod": 200 }.to_json
-  }
-
-  let(:stub) { stub_request(:get, api).to_return(status: status, body: body) }
+  include_context "helpers"
 
   def app
     Sinatra::Application
@@ -35,21 +19,28 @@ RSpec.describe "My App" do
   it "displays a homepage" do
     get "/"
     expect(last_response).to be_ok
-    expect(last_response.body).to match(/City/)
+    expect(last_response.body).to match(/Enter a city/)
   end
 
   it "displays temperature for berlin" do
-    stub
-    post "/weather", city: "Berlin"
+    coordinates_stub
+    weather_stub
+    post "/weather", city: berlin_city
     expect(last_response.status).to eq(200)
-    expect(last_response.body).to match(/The current temperature in Berlin/)
+    expect(last_response.body).to include("{\"city\":\"Berlin\"")
   end
 
   it "displays the error page with invalid city" do
-    stub_request(:get, incorrect_api).to_return(status: 404, body: '{"cod":"404","message":"city not found"}')
-    # binding.pry
-    post "/weather", city: "Invalid"
+    stub_request(:get, invalid_coordinates_api).to_return(status: status, body: "[]")
+    stub_request(:get, invalid_weather_api).to_return(status: 404, body: '{"cod":"404","message":"city not found"}')
+    post "/weather", city: invalid_city
     expect(last_response.status).to eq(404)
-    expect(last_response.body).to match(/Invalid is not found/)
+    expect(last_response.body).to match(/#{invalid_city} is not found/)
+  end
+
+  it "displays temperature with valid coordinates" do
+    weather_stub
+    post "/coordinates", { lat: 52.5244, lng: 13.4105 }
+    expect(last_response.status).to eq(200)
   end
 end

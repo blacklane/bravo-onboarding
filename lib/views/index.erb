@@ -1,6 +1,33 @@
-<form action="/weather" method="post">
-  <label for="city">City</label>
-  <input type="text" id="city" name="city">
-  <input type="submit" value="Submit">
-</form>
+<div class="container container-main">
+  <input type="text" id="city" name="city" placeholder="Enter a city">
+  <button id="city_form">Submit</button>
+  <br>
+  <p id="error_message"></p>
 
+  <div class="map">
+    <div id='map' style='width: 400px; height: 300px;'></div>
+  </div>
+
+  <div class="card-weather">
+    <div class="card_weather_information">
+      <% if params[:city] %>
+        <h4 id="my_weather">Weather in</h4>
+      <% end %>
+      <h4 id="my_weather">Weather in</h4>
+      <p id="current_temp">Current Temperature:</p>
+      <p id="feels_like">Feels like:</p>
+      <p id="weather_description">Currently: </p>
+      <p id="temp_high">Today's high:</p>
+      <p id="temp_low">Todays low:</p>
+    </div>
+    <div class="weather_icon">
+      <img id="weather_icon" src="" alt="">
+    </div>
+  </div>
+
+  <p id="weather_data"><%= @json %></p>
+  <p id="mapbox_key"><% ENV['MAPBOX'] %></p>
+
+</div>
+<script type='text/javascript' src='javascript/config.js'></script>
+<script src="javascript/index.js" type="text/javascript"></script>
