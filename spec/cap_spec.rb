@@ -48,10 +48,10 @@ RSpec.describe "System" do
     end
   end
 
-  context 'when the users locale is en, de, or fr' do
-    it 'displays a translated weather heading', js: true do
+  context "when the users locale is en, de, or fr" do
+    it "displays a translated weather heading", js: true do
       visit "/"
-      expect(page).to have_content I18n.t(:weather_in)
+      expect(page).to have_content(I18n.t(:weather_in))
     end
   end
 end
