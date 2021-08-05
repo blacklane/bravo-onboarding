@@ -16,13 +16,23 @@ require_relative "./errors/invalid_city_error"
 require "i18n"
 
 I18n.load_path << Dir["#{File.expand_path('./config/locales')}/*.yml"]
-I18n.default_loclae = :en
+
+LOCALES = { en: "en", fr: "fr", de: "de" }
+
+I18n.default_locale = :en
 
 set :bind, "0.0.0.0"
 
 use Rack::JSONBodyParser, media: /json/
 
-get "/" do
+get "/(:lang)?" do
+  unless params[:lang].nil?
+    if LOCALES.has_value?(params[:lang]) &&
+      I18n.locale = params[:lang]
+    else
+      redirect to"/"
+    end
+  end
   erb :index
 end
 

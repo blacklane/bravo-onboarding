@@ -49,9 +49,21 @@ RSpec.describe "System" do
   end
 
   context "when the users locale is en, de, or fr" do
-    it "displays a translated weather heading", js: true do
+    it "default language is English when no language param given" do
       visit "/"
-      expect(page).to have_content(I18n.t(:weather_in))
+      expect(page).to have_content("Weather in")
+    end
+    it "displays a translated weather heading for German", js: true do
+      visit "/de"
+      expect(page).to have_content("Wetter in")
+    end
+    it "displays a translated weather heading for French", js: true do
+      visit "/fr"
+      expect(page).to have_content("Météo à")
+    end
+    it "redirects to / with English as default is locale is neithe en, fr, nor de", js: true do
+      visit "/es"
+      expect(page).to have_content("Weather in")
     end
   end
 end
