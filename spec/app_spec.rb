@@ -25,7 +25,7 @@ RSpec.describe "My App" do
   it "displays temperature for berlin" do
     coordinates_stub
     weather_stub
-    post "/weather", city: berlin_city
+    post "/weather", city: berlin_city, locale: en_locale
     expect(last_response.status).to eq(200)
     expect(last_response.body).to include("{\"city\":\"Berlin\"")
   end
