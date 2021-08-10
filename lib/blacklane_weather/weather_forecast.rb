@@ -11,28 +11,28 @@ module BlacklaneWeather
     OPEN_WEATHER_MAP_HOST = "http://api.openweathermap.org"
     WEATHER_ENDPOINT = "/data/2.5/weather"
     GEO_ENDPOINT = "/geo/1.0/direct"
-    attr_reader :city
+    attr_reader :city, :locale
 
     def initialize(city)
       @city = city
     end
 
-    def weather_call
+    def weather_call(locale)
       coordinates = location_coordinates
       api = "#{OPEN_WEATHER_MAP_HOST}#{WEATHER_ENDPOINT}?lat=#{coordinates[:lat]}&lon=#{coordinates[:lng]}"\
-      "&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
+      "&units=metric&lang=#{locale}&appid=#{ENV['OPENWEATHER_API_KEY']}"
       weather_data = parse_api(api)
-      temperature_data(weather_data)
+      temperature_data(weather_data, locale)
     end
 
-    def self.coordinates_weather_call(lat, lng)
+    def self.coordinates_weather_call(lat, lng, locale)
       api = "#{OPEN_WEATHER_MAP_HOST}#{WEATHER_ENDPOINT}?lat=#{lat}&lon=#{lng}"\
-      "&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
+      "&units=metric&lang=#{locale}&appid=#{ENV['OPENWEATHER_API_KEY']}"
       uri = URI(api)
       http_response = Net::HTTP.get_response(uri)
       weather_data = JSON.parse(http_response.body)
       c = WeatherForecast.new(weather_data["name"])
-      c.temperature_data(weather_data)
+      c.temperature_data(weather_data, locale)
     end
 
     def parse_api(api)
@@ -41,7 +41,7 @@ module BlacklaneWeather
       JSON.parse(http_response.body)
     end
 
-    def temperature_data(weather_data)
+    def temperature_data(weather_data, locale)
       TemperatureData.new(weather_data["name"],
                           weather_data["coord"]["lat"],
                           weather_data["coord"]["lon"],
@@ -50,7 +50,8 @@ module BlacklaneWeather
                           weather_data["main"]["temp_min"],
                           weather_data["main"]["temp_max"],
                           weather_data["weather"][0]["description"],
-                          weather_data["weather"][0]["icon"])
+                          weather_data["weather"][0]["icon"],
+                          locale)
     end
 
     private

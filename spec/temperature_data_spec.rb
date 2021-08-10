@@ -6,7 +6,7 @@ require "rack/test"
 require "spec_helper"
 
 RSpec.describe "The Temperature Data class" do
-  let(:temperature_instance) { BlacklaneWeather::TemperatureData.new(20, 21, 18, 23, 24, 20, 26, "cloudy", "2d") }
+  let(:temperature_instance) { BlacklaneWeather::TemperatureData.new(20, 21, 18, 23, 24, 20, 26, "cloudy", "2d", "en") }
 
   it "creates a new instance of GetWeather" do
     expect(temperature_instance).to be_an_instance_of(BlacklaneWeather::TemperatureData)

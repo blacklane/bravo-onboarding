@@ -1,0 +1,10 @@
+en:
+  error: "is not found. Enter a valid city name or check spelling"
+  enter_city: "Enter a city"
+  submit: "Submit"
+  weather_in: "Weather in"
+  current_temp: "Current Temperature"
+  feels_like: "Feels like"
+  current_status: "Currently"
+  temp_high: "Today's high"
+  temp_low: "Today's low"

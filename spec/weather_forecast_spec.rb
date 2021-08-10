@@ -16,7 +16,7 @@ RSpec.describe BlacklaneWeather::WeatherForecast do
   end
 
   it "returns a Temperature Data object with correct data" do
-    forecast = berlin_instance.weather_call
+    forecast = berlin_instance.weather_call(en_locale)
     expect(forecast.temperature).to eq(27.35)
     expect(forecast.feels_like).to eq(28.13)
     expect(forecast.min_temp).to eq(25.14)
@@ -24,14 +24,14 @@ RSpec.describe BlacklaneWeather::WeatherForecast do
   end
 
   it "returns an object when a proper city is given" do
-    berlin_weather_data = berlin_instance.weather_call
+    berlin_weather_data = berlin_instance.weather_call(en_locale)
     #  expect this to return an object, not specifically a json.
     expect(berlin_weather_data).not_to be_nil
   end
 
   context "when #weather_call" do
     it "returns an instance of Temperature Data" do
-      berlin_weather_data = berlin_instance.weather_call
+      berlin_weather_data = berlin_instance.weather_call(en_locale)
       expect(berlin_weather_data).to be_an_instance_of(BlacklaneWeather::TemperatureData)
     end
   end
@@ -40,7 +40,7 @@ RSpec.describe BlacklaneWeather::WeatherForecast do
     stub_request(:get, invalid_coordinates_api).to_return(status: status, body: "[]")
     stub_request(:get, invalid_weather_api).to_return(status: 404, body: '{"cod":"404","message":"city not found"}')
 
-    expect { invalid_instance.weather_call }.to raise_error(Errors::InvalidCityError)
+    expect { invalid_instance.weather_call(en_locale) }.to raise_error(Errors::InvalidCityError)
   end
 
   it "creates a new instance of GetWeather" do

@@ -116,6 +116,7 @@ RSpec.shared_context "helpers" do
   let(:london_city) { "London" }
   let(:berlin_coordinates) { { lat: 52.5244, lng: 13.4105 } }
   let(:invalid_city) { "Invalid" }
+  let(:en_locale) { "en" }
 
   let(:berlin_instance) { BlacklaneWeather::WeatherForecast.new(berlin_city) }
   let(:london_instance) { BlacklaneWeather::WeatherForecast.new(london_city) }
@@ -123,7 +124,7 @@ RSpec.shared_context "helpers" do
   let(:invalid_instance) { BlacklaneWeather::WeatherForecast.new(invalid_city) }
 
   let(:weather_api) {
-    "http://api.openweathermap.org/data/2.5/weather?lat=#{berlin_coordinates[:lat]}&lon=#{berlin_coordinates[:lng]}&units=metric&appid=#{ENV['OPENWEATHER_API_KEY']}"
+    "http://api.openweathermap.org/data/2.5/weather?lat=#{berlin_coordinates[:lat]}&lon=#{berlin_coordinates[:lng]}&units=metric&lang=#{en_locale}&appid=#{ENV['OPENWEATHER_API_KEY']}"
   }
 
   let(:invalid_weather_api) {

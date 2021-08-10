@@ -3,8 +3,10 @@ ENV["APP_ENV"] = "test"
 require "./lib/app"  # <-- your sinatra app
 require "capybara"
 require "capybara/dsl"
+require "capybara-screenshot/rspec"
 require "test/unit"
 require "spec_helper"
+require "i18n"
 
 RSpec.describe "System" do
   include Capybara::DSL
@@ -33,6 +35,8 @@ RSpec.describe "System" do
       visit "/"
       fill_in "city", with: london_city
       click_button("city_form")
+      # uncomment below to view screenshot
+      # screenshot_and_open_image
       expect(page).to have_content("Weather in London")
     end
   end
@@ -43,7 +47,28 @@ RSpec.describe "System" do
       fill_in "city", with: invalid_city
       click_button("city_form")
       expect(page).to have_css("#error_message")
+      # uncomment below to view screenshot
+      # screenshot_and_open_image
       expect(page).to have_content("#{invalid_city} is not found. Enter a valid city name or check spelling")
     end
+  end
+
+  context "when the users locale is en, de, or fr" do
+    it "default language is English when no language param given" do
+      visit "/"
+      expect(page).to have_content("Weather in")
+    end
+    it "displays a translated weather heading for German", js: true do
+      visit "/?locale=de"
+      expect(page).to have_content("Wetter in")
+    end
+    it "displays a translated weather heading for French", js: true do
+      visit "/?locale=fr"
+      expect(page).to have_content("Météo à")
+    end
+    # it "redirects to / with English as default is locale is neithe en, fr, nor de", js: true do
+    #   visit "/?locale=es"
+    #   expect(page).to have_content("Weather in")
+    # end
   end
 end

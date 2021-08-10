@@ -1,0 +1,10 @@
+de:
+  error: "wird nicht gefunden. Geben Sie einen gültigen Stadtnamen ein oder überprüfen Sie die Rechtschreibung"
+  enter_city: "Geben Sie eine Stadt ein"
+  submit: "einreichen"
+  weather_in: "Wetter in"
+  current_temp: "Aktuelle Temperatur"
+  feels_like: "Fühlt sich an wie"
+  current_status: "Aktuell"
+  temp_high: "Das Hoch von heute"
+  temp_low: "Tagestief"

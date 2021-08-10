@@ -1,0 +1,10 @@
+fr:
+  error: "est introuvable. Entrez un nom de ville valide ou vérifiez l'orthographe"
+  enter_city: "Entrez une ville"
+  submit: "Soumettre"
+  weather_in: "Météo à"
+  current_temp: "Température actuelle"
+  feels_like: "On dirait"
+  current_status: "Actuellement"
+  temp_high: "Le maximum d'aujourd'hui"
+  temp_low: "Le miniimum d'aujourd'hui"
